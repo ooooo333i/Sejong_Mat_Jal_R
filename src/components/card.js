@@ -72,6 +72,7 @@ export default function UpdateCard({data}) {
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           {data.address}
         </Typography>
+        <Typography>{data.majorTag} ⭐ 평점: {data.rating} </Typography>
       </CardContent>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
@@ -91,7 +92,7 @@ export default function UpdateCard({data}) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography>⭐ 평점: {data.rating}</Typography>
+          
           <Typography variant="body2" sx={{ mt: 2 }}>
             이 식당은 {data.majorTag} 분류에 속하며, 지도 좌표는 위도 {data.location.lat}, 경도 {data.location.lng}입니다.
           </Typography>
