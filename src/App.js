@@ -1,13 +1,10 @@
 import React from 'react';
-import Card from './components/card';
-
+import ScrollView from './components/scrollview';
 
 function App() {
   return (
-    <div className="App">
-      <h1>리스트</h1>
-      <Card variant="outlined">{Card}</Card>
-
+    <div className="App" style={{ height: '100vh' }}>
+      <ScrollView />
     </div>
   );
 }

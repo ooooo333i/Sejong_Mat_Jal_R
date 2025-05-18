@@ -1,0 +1,91 @@
+[
+  {
+    "id": "ChIJoYDLOsWkfDUREoVjl59t1NM",
+    "name": "한국통닭",
+    "location": {
+      "lat": 37.5491126,
+      "lng": 127.07145500000001
+    },
+    "rating": 1,
+    "address": "서울특별시 광진구 군자동 362번지 1층 103호 동일흥업주식회사 주식회사",
+    "majorTag": "호프/통닭"
+  },
+  {
+    "id": "ChIJzUJfz9qkfDURW_Q6WeeJQBA",
+    "name": "행복한그릇",
+    "location": {
+      "lat": 37.5488059,
+      "lng": 127.07289829999999
+    },
+    "rating": 4.4,
+    "address": "서울특별시 광진구 군자동 372-6",
+    "majorTag": "한식"
+  },
+  {
+    "id": "ChIJjZYrL8WkfDURkMOaViMIzIw",
+    "name": "장안식당",
+    "location": {
+      "lat": 37.5487331,
+      "lng": 127.07171090000001
+    },
+    "rating": null,
+    "address": "서울특별시 광진구 군자동 361-13",
+    "tag": "한식",
+    "majorTag": "한식"
+  },
+  {
+    "id": "ChIJtdc-PcWkfDUR3b4Lcrc0vzI",
+    "name": "꽃",
+    "location": {
+      "lat": 37.549330499999996,
+      "lng": 127.07098379999998
+    },
+    "rating": null,
+    "address": "서울특별시 광진구 군자동 362-1번지 1층",
+    "majorTag": "호프/통닭"
+  },
+  {
+    "id": "ChIJ6S9IUAClfDURy1hfCFGYNNQ",
+    "name": "명륜진사갈비 군자점",
+    "location": {
+      "lat": 37.5492076,
+      "lng": 127.07109349999999
+    },
+    "rating": 5,
+    "address": "서울특별시 광진구 군자로 70",
+    "majorTag": "한식"
+  },
+  {
+    "id": "ChIJC766XsClfDURnZJWqe-Niz8",
+    "name": "미식반점 군자본점",
+    "location": {
+      "lat": 37.5492076,
+      "lng": 127.07109349999999
+    },
+    "rating": 4,
+    "address": "서울특별시 광진구 군자로 70 1 층",
+    "majorTag": "중국식"
+  },
+  {
+    "id": "ChIJ6exiGcWkfDUR5IsAe7WyI9E",
+    "name": "송정닭집",
+    "location": {
+      "lat": 37.5492434,
+      "lng": 127.0705594
+    },
+    "rating": null,
+    "address": "서울특별시 군자동 359-1번지 광진구 서울특별시 KR",
+    "majorTag": "까페"
+  },
+  {
+    "id": "ChIJiWUXaQClfDURm8BD_lO4rqM",
+    "name": "밀숲 세종대점",
+    "location": {
+      "lat": 37.5498895,
+      "lng": 127.0710126
+    },
+    "rating": 4.5,
+    "address": "서울특별시 광진구 군자동 363-14",
+    "majorTag": "한식"
+  }
+]
