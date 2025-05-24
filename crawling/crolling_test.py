@@ -30,10 +30,10 @@ page_count = 0
 img_dir = "images"
 os.makedirs(img_dir, exist_ok=True)
 
-while page_count < 3:
+while page_count < 5:
     print(f"📄 페이지 {page_count + 1} 크롤링 중...")
+    #  장소 목록 수집
     places = driver.find_elements(By.CSS_SELECTOR, "li.PlaceItem")
-
     for place in places:
         try:
             name = place.find_element(By.CSS_SELECTOR, ".tit_name .link_name").text
@@ -80,9 +80,9 @@ while page_count < 3:
                     full_text = review_wrap.find_element(By.CSS_SELECTOR, 'p.desc_review').text.strip()
                     sample_reviews.append(full_text)
                 except Exception as e:
-                    print("⚠️ 개별 리뷰 수집 실패:", e)
+                    print(" 개별 리뷰 수집 실패:", e)
         except Exception as e:
-            print("⚠️ 리뷰 수집 실패:", e)
+            print(" 리뷰 수집 실패:", e)
 
 
         try:
@@ -104,7 +104,7 @@ while page_count < 3:
                 with open(img_path, "wb") as f:
                     f.write(response.content)
         except Exception as e:
-            print("⚠️ 이미지 수집 실패:", e)
+            print(" 이미지 수집 실패:", e)
 
         driver.close()
         driver.switch_to.window(driver.window_handles[0])
@@ -119,19 +119,35 @@ while page_count < 3:
             "sample_reviews": sample_reviews,
             "image_url": image_url
         })
-
-    page_count += 1
-    try:
-        next_btn = driver.find_element(By.CSS_SELECTOR, 'a#info.search.page.next')
-        if 'disabled' in next_btn.get_attribute('class'):
+    # 1페이지 -> 2페이지 넘어가는 경우 '더보기' 버튼 클릭
+    if page_count == 0:
+        try:
+            more_btn = driver.find_element(By.ID, "info.search.place.more")
+            driver.execute_script("arguments[0].scrollIntoView(true);", more_btn)
+            time.sleep(1)
+            driver.execute_script("arguments[0].click();", more_btn)
+            time.sleep(2)
+            wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.PlaceItem")))
+        except Exception as e:
+            print(" 더보기 버튼 클릭 실패:", e)
             break
-        next_btn.click()
-        time.sleep(2)
-        wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.PlaceItem")))
-    except Exception as e:
-        print("⚠️ 다음 페이지 이동 실패:", e)
-        break
 
+    # 이후 페이지 (3페이지부터)
+    elif page_count > 1:
+        try:
+            next_btn_id = f"info.search.page.no{page_count + 1}"
+            next_btn = driver.find_element(By.ID, next_btn_id)
+            driver.execute_script("arguments[0].scrollIntoView(true);", next_btn)
+            time.sleep(1)
+            driver.execute_script("arguments[0].click();", next_btn)
+            time.sleep(2)
+            wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.PlaceItem")))
+        except Exception as e:
+            print(" 다음 페이지 이동 실패:", e)
+            break
+
+    # 카운트 증가는 마지막에!
+    page_count += 1
 # 저장
 with open("세종대_맛집_리스트_with_리뷰_이미지.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
