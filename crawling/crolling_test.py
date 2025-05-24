@@ -63,11 +63,27 @@ while page_count < 3:
             review_tab.click()
             time.sleep(2)
             # ▶ 후기 수집
-            review_elements = driver.find_elements(By.CSS_SELECTOR, 'p.desc_review')
-            for r in review_elements[:3]:
-                sample_reviews.append(r.text.strip())
+            review_elements = driver.find_elements(By.CSS_SELECTOR, 'li .wrap_review')
+            for review_wrap in review_elements[:3]:
+                try:
+                    # 더보기 버튼이 존재하면 클릭
+                    try:
+                        more_button = review_wrap.find_element(By.CSS_SELECTOR, 'span.btn_more')
+                        driver.execute_script("arguments[0].scrollIntoView(true);", more_button)
+                        time.sleep(0.5)
+                        driver.execute_script("arguments[0].click();", more_button)
+                        time.sleep(1)
+                    except:
+                        pass  # 더보기 버튼이 없으면 패스
+
+                    # 전체 텍스트 가져오기
+                    full_text = review_wrap.find_element(By.CSS_SELECTOR, 'p.desc_review').text.strip()
+                    sample_reviews.append(full_text)
+                except Exception as e:
+                    print("⚠️ 개별 리뷰 수집 실패:", e)
         except Exception as e:
             print("⚠️ 리뷰 수집 실패:", e)
+
 
         try:
             # ▶ 사진 탭 클릭
