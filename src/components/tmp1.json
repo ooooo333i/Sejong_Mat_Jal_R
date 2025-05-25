@@ -120,26 +120,6 @@
     "image_url": "https://img1.kakaocdn.net/cthumb/local/C800x800.q50/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F9770a4fec9d922a7a1d1208552e28fb65f4b1290%3Foriginal"
   },
   {
-    "id": "ChIJ94edcwClfDURRh9UUW_OqAU",
-    "name": "진진면옥",
-    "location": {
-      "lat": 37.549189399999996,
-      "lng": 127.0691258
-    },
-    "rating": "5.0",
-    "address": "서울 광진구 동일로32길 18",
-    "majorTag": "한식",
-    "phone": "02-499-2634",
-    "review_count": "105",
-    "detail_link": "https://place.map.kakao.com/1564110155",
-    "sample_reviews": [
-      "배달 시켜먹었는데 슴슴하니 양도 많고 맛있었어요 ㅎㅎ 무생채랑 열무도 잔뜩 주시네오 ㅠㅜ",
-      "오장동 스타일이고 맛있어요. 면의 식감이 국수에 가까운 점이 조금 아쉽네요.",
-      "여기 드디어 와봤어요! 여자친구랑 매운갈비찜 시켜서 물냉이랑 비냉 각각 골랐는데 진짜 대박이었어요. \n\n갈비찜은 매콤하면서도 깊은 맛이 있고 고기도 푹 고아져서 뼈에서 살이 잘 떨어졌어요. \n\n냉면은 생각보다 양이 많아서 놀랐는데 쫄깃한 면발이 진짜 맛있었습니다. \n\n함흥냉면 전문점이라 그런지 확실히 다르네요. 같이 나오는 탕국물이랑 찜만두도 좋았고 기본 반찬들도 맛있어요. \n\n넉넉한 양에 가격도 괜찮은 편! 어린이대공원 근처 맛집 찾으시는 분들 강추합니다. 다음에는 다른 메뉴도 먹어보고 싶어요. 접기"
-    ],
-    "image_url": "https://img1.kakaocdn.net/cthumb/local/C800x800.q50/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F6e2ffef5e8f7e16de3bbe6efc0e2ce2696f3d292%3Foriginal"
-  },
-  {
     "id": "ChIJOXz9PNGkfDURW3SNqNYTErY",
     "name": "하이난",
     "location": {
@@ -159,26 +139,7 @@
     ],
     "image_url": "https://img1.kakaocdn.net/cthumb/local/C800x800.q50/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F514069b32c1e5bef2de3b6e56dc812487e5d183c%3Foriginal"
   },
-  {
-    "id": "ChIJk6YHeB2lfDURIiHaOY_ZamM",
-    "name": "가츠시 건대점",
-    "location": {
-      "lat": 37.546334699999996,
-      "lng": 127.0757083
-    },
-    "rating": "4.5",
-    "address": "서울 광진구 광나루로 418",
-    "majorTag": "일식",
-    "phone": "02-444-2355",
-    "review_count": "75",
-    "detail_link": "https://place.map.kakao.com/1277643944",
-    "sample_reviews": [
-      "김치치즈나베 지깁니다\n치즈도 양이 어마어마함 ㄱㄷ",
-      "양많고 친절한, 맛있는, 아주 좋은. 더 없이 좋다.",
-      "모밀이 두판"
-    ],
-    "image_url": "https://img1.kakaocdn.net/cthumb/local/C800x800.q50/?fname=http%3A%2F%2Ft1.daumcdn.net%2Flocal%2FkakaomapPhoto%2Freview%2F9770a4fec9d922a7a1d1208552e28fb65f4b1290%3Foriginal"
-  },
+
   {
     "id": "ChIJ94edcwClfDURRh9UUW_OqAU",
     "name": "진진면옥",
