@@ -9,7 +9,7 @@ import Collapse from "@mui/material/Collapse";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
+import { blue } from "@mui/material/colors";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -50,7 +50,7 @@ export default function UpdateCard({data}) {
     <Card sx={{ maxWidth: 300, minWidth: 300, minHeight: 420, m: 1 }}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+          <Avatar sx={{ bgcolor: blue[500] }} aria-label="recipe">
             {data.name[0]} {/* 이름 첫 글자 */}
           </Avatar>
         }
@@ -65,7 +65,7 @@ export default function UpdateCard({data}) {
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg" // 나중에 data.image로 대체 가능
+        image={data.image_url} // 나중에 data.image로 대체 가능
         alt={data.name}
       />
       <CardContent>
@@ -95,6 +95,7 @@ export default function UpdateCard({data}) {
           
           <Typography variant="body2" sx={{ mt: 2 }}>
             이 식당은 {data.majorTag} 분류에 속하며, 지도 좌표는 위도 {data.location.lat}, 경도 {data.location.lng}입니다.
+            {data.sample_reviews}
           </Typography>
         </CardContent>
       </Collapse>
