@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import Card from "./card";
-import restaurantData from "./tmp.json";
+import restaurantData from "./tmp1.json";
 
 export default function ScrollView({ selectedTags }) {
   const filteredData =

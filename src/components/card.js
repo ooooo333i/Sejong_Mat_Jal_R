@@ -65,7 +65,7 @@ export default function UpdateCard({data}) {
       <CardMedia
         component="img"
         height="194"
-        image="/static/images/cards/paella.jpg" // 나중에 data.image로 대체 가능
+        image={data.image_url} // 나중에 data.image로 대체 가능
         alt={data.name}
       />
       <CardContent>
@@ -95,6 +95,7 @@ export default function UpdateCard({data}) {
           
           <Typography variant="body2" sx={{ mt: 2 }}>
             이 식당은 {data.majorTag} 분류에 속하며, 지도 좌표는 위도 {data.location.lat}, 경도 {data.location.lng}입니다.
+            {data.sample_reviews}
           </Typography>
         </CardContent>
       </Collapse>
