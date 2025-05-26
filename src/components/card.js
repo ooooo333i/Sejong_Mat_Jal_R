@@ -11,6 +11,7 @@ import {
   ExpandMore as ExpandMoreIcon,
   MoreVert as MoreVertIcon
 } from "@mui/icons-material";
+import Map from "./map";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -91,7 +92,7 @@ export default function UpdateCard({data}) {
         <CardContent>
           
           <Typography variant="body2" sx={{ mt: 2 }}>
-            이 식당은 {data.majorTag} 분류에 속하며, 지도 좌표는 위도 {data.location.lat}, 경도 {data.location.lng}입니다.
+            <Map lat={data.location.lat} lng={data.location.lng} />
             {data.sample_reviews}
             <a href={data.detail_link} target="_blank" rel="noopener noreferrer">
               상세페이지
