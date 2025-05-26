@@ -4,13 +4,14 @@ import {
   Avatar, IconButton, Typography
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { blue } from "@mui/material/colors";
 import {
   Favorite as FavoriteIcon,
   Share as ShareIcon,
   ExpandMore as ExpandMoreIcon,
-  MoreVert as MoreVertIcon,
-
+  MoreVert as MoreVertIcon
 } from "@mui/icons-material";
+import Map from "./map";
 
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
@@ -46,6 +47,7 @@ export default function UpdateCard({ data }) {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
   // 아이콘 URL
   const icons = {
     phone: "https://img.icons8.com/ios-glyphs/15/phone--v1.png",
@@ -107,6 +109,7 @@ export default function UpdateCard({ data }) {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography variant="body2" sx={{ mt: 2 }}>
+            <Map lat={data.location.lat} lng={data.location.lng} />
             이 식당은 {data.majorTag} 분류에 속하며, 지도 좌표는 위도 {data.location.lat}, 경도 {data.location.lng}입니다.
             {data.sample_reviews}
           </Typography>
