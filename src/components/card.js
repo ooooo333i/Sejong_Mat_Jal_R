@@ -1,15 +1,12 @@
 import React from "react";
 import {
-  Card, CardHeader, CardMedia, CardContent, CardActions, Collapse,
-  Avatar, IconButton, Typography
+  Card, CardHeader, CardMedia, CardContent, CardActions, Collapse, IconButton, Typography
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { blue } from "@mui/material/colors";
 import {
   Favorite as FavoriteIcon,
   Share as ShareIcon,
   ExpandMore as ExpandMoreIcon,
-  MoreVert as MoreVertIcon
 } from "@mui/icons-material";
 import Map from "./map";
 
@@ -56,8 +53,8 @@ export default function UpdateCard({ data }) {
   };
 
   return (
-    <Card sx={{ maxWidth: 300, minWidth: 300, minHeight: 420, m: 1 }}>
-      <CardActionArea component="a" href={data.detail_link}>
+    <Card sx={{ maxWidth: 300,minWidth: 300, minHeight: 430, m: 1 }}>
+      <CardActionArea component="a" href={data.detail_link} target="_blank">
         <CardHeader
           title={data.name}
           subheader={data.majorTag}
