@@ -25,7 +25,6 @@ wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, "li.PlaceItem")
 
 data = []
 page_count = 0
-
 # 이미지 저장 폴더
 img_dir = "images"
 os.makedirs(img_dir, exist_ok=True)
@@ -106,9 +105,32 @@ while page_count < 5:
         except Exception as e:
             print(" 이미지 수집 실패:", e)
 
+         # 메뉴 탭 
+        try:
+        # 메뉴 탭 클릭
+            menu_tab = WebDriverWait(driver, 5).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, 'a.link_tab[href="#menuInfo"]'))
+            )
+            menu_tab.click()
+    
+        # 메뉴 정보가 로드될 때까지 대기
+            WebDriverWait(driver, 5).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'p.desc_item'))
+            )
+    
+        #  첫 번째 가격 정보 가져오기
+            menu_price_el = driver.find_element(By.CSS_SELECTOR, 'p.desc_item')
+            menu_price = menu_price_el.text.strip()
+    
+        except Exception as e:
+            print(" ⚠️ 메뉴 가격 수집 실패:", e)
+            menu_price = "정보 없음"
+
         driver.close()
         driver.switch_to.window(driver.window_handles[0])
 
+  
+        
         data.append({
             "name": name,
             "address": address,
@@ -117,7 +139,8 @@ while page_count < 5:
             "review_count": reviews,
             "detail_link": link,
             "sample_reviews": sample_reviews,
-            "image_url": image_url
+            "image_url": image_url,
+            "menu_price": menu_price  
         })
     # 1페이지 -> 2페이지 넘어가는 경우 '더보기' 버튼 클릭
     if page_count == 0:
