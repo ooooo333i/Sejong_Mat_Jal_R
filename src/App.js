@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import ScrollView from './components/scrollview';
 import TagSelector from './components/Tag';
+import Footer from './components/footer';
+import { Box } from '@mui/material';
 
 function App() {
   const [selectedTags, setSelectedTags] = useState([]);
 
   return (
-    <div className="App" style={{ height: '100vh' }}>
-      <TagSelector selectedTags={selectedTags} onTagChange={setSelectedTags} />
-      <ScrollView selectedTags={selectedTags} />
-    </div>
+    <Box
+      display="flex"
+      flexDirection="column"
+      minHeight="100vh"
+    >
+      <Box component="main" flexGrow={1}>
+        <TagSelector selectedTags={selectedTags} onTagChange={setSelectedTags} />
+        <ScrollView selectedTags={selectedTags} />
+      </Box>
+      <Footer />
+    </Box>
   );
 }
 
