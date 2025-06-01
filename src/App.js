@@ -9,13 +9,15 @@ function App() {
     food_type: "",
     tag: "",
     service_type: "",
-    menu_price: ""
+    menu_price: "",
   });
 
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
       <TagSelector filters={filters} onFilterChange={setFilters} />
-      <ScrollView filters={filters} />
+      <Box component="main" flex={1}>
+        <ScrollView filters={filters} />
+      </Box>
       <Footer />
     </Box>
   );
