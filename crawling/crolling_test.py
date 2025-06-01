@@ -175,5 +175,5 @@ while page_count < 5:
 with open("세종대_맛집_리스트_with_리뷰_이미지.json", "w", encoding="utf-8") as f:
     json.dump(data, f, ensure_ascii=False, indent=2)
 
-print("✅ 크롤링 및 저장 완료!")
+print(" 크롤링 및 저장 완료!")
 driver.quit()
