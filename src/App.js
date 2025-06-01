@@ -12,11 +12,17 @@ function App() {
     menu_price: "",
   });
 
+  const [filteredData, setFilteredData] = useState([]);
+
+  const handleFilteredDataChange = (data) => {
+    setFilteredData(data);
+  };
+
   return (
     <Box display="flex" flexDirection="column" minHeight="100vh">
-      <TagSelector filters={filters} onFilterChange={setFilters} />
+      <TagSelector onFilteredDataChange={handleFilteredDataChange} />
       <Box component="main" flex={1}>
-        <ScrollView filters={filters} />
+        <ScrollView filteredData={filteredData} />
       </Box>
       <Footer />
     </Box>
