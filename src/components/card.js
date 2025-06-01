@@ -145,7 +145,7 @@ export default function UpdateCard({ data }) {
             alignItems: "center",
             flexDirection: "column",
           }}>
-          <Map lat={data.location.lat} lng={data.location.lng} />
+          <Map address={data.address} />
           &nbsp;
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
             <img width="15" height="15" src={icons.place} alt="place-marker" /> &nbsp;
