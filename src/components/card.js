@@ -14,6 +14,7 @@ import Map from "./map";
 import Rating from "@mui/material/Rating";
 import Box from "@mui/material/Box";
 import { CardActionArea } from "@mui/material";
+import MapIcon from '@mui/icons-material/Map';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -105,7 +106,7 @@ export default function UpdateCard({ data }) {
         </IconButton>
         {/* 지도 아이콘 */}
         <IconButton aria-label="marker" onClick={handleMapClick}>
-          <img width="25" height="25" src={icons.marker} alt="place-marker--v1" />
+          <MapIcon alt="place-marker--v1" />
         </IconButton>
         {/* 더보기 */}
         {/*
