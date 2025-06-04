@@ -4,9 +4,6 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import {
-  Favorite as FavoriteIcon,
-  Share as ShareIcon,
-  ExpandMore as ExpandMoreIcon,
   Close as CloseIcon,
 } from "@mui/icons-material";
 import Map from "./map";
@@ -28,12 +25,7 @@ const ExpandMore = styled((props) => {
 }));
 
 export default function UpdateCard({ data }) {
-  const [expanded, setExpanded] = useState(false);
   const [showMap, setShowMap] = useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
 
   const handleMapClick = () => {
     setShowMap(!showMap);
@@ -43,26 +35,49 @@ export default function UpdateCard({ data }) {
     phone: "https://img.icons8.com/ios-glyphs/15/phone--v1.png",
     place: "https://img.icons8.com/pastel-glyph/15/place-marker.png",
     star: "https://img.icons8.com/fluency/15/star--v1.png",
-    marker: "https://img.icons8.com/color/15/place-marker--v1.png"
   };
 
   return (
     <Card sx={{
       maxWidth: 300,
       minWidth: 320,
-      minHeight: 430,
+      minHeight: 450,
       m: 1,
       position: "relative", // 부모를 기준으로 오버레이 배치
       overflow: "hidden"
     }}>
-      <CardActionArea component="a" href={data.detail_link} target="_blank">
+      <CardActionArea component="a" href={data.detail_link} target="_blank" sx={{ height: 400 }}>
         {/* 카드 헤더 */}
-        <CardHeader title={data.name} subheader={data.majorTag} />
+        <CardHeader title={data.name} subheader={data.majorTag} sx={{
+          height: 40,
+          alignItems: 'flex-start',
+          '& .MuiCardHeader-content': {
+            overflow: 'hidden'
+          },
+          '& .MuiCardHeader-title': {
+            fontSize: '1.4rem',
+            lineHeight: 1.2,
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          },
+          '& .MuiCardHeader-subheader': {
+            fontSize: '0.875rem',
+            marginTop: '4px',
+            display: '-webkit-box',
+            WebkitLineClamp: 1,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis'
+          }
+        }} />
         {/* 카드 내용 */}
         <CardMedia
           component="img"
-          height="194"
-          image={data.image_url}
+          height="210"
+          image={data.imag_url}
           alt={data.name}
         />
         <CardContent>
@@ -94,41 +109,13 @@ export default function UpdateCard({ data }) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      {/* 추가 옵션? */}
+      {/* 추가 옵션 */}
       <CardActions disableSpacing>
-        {/* 북마크 아이콘*/}
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        {/* 공유 아이콘*/}
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
         {/* 지도 아이콘 */}
         <IconButton aria-label="marker" onClick={handleMapClick}>
           <MapIcon alt="place-marker--v1" />
         </IconButton>
-        {/* 더보기 */}
-        {/*
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-        */}
       </CardActions>
-
-      {/* 리뷰 영역 */}
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography variant="body2" sx={{ mt: 2 }}>
-            {data.sample_reviews}
-          </Typography>
-        </CardContent>
-      </Collapse>
 
       {/* 지도(오버레이) */}
       {showMap && (
