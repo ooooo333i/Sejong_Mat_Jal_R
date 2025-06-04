@@ -2,10 +2,9 @@
 import React, { useState, useEffect } from "react";
 import restaurantData from './allAboutInfo.json';
 import {
-    IconButton, Typography
+    IconButton, Typography, Box, Slider
 } from "@mui/material";
 import RefreshIcon from '@mui/icons-material/Refresh';
-
 
 const getUniqueValues = (key) => {
     const uniqueValues = [...new Set(restaurantData.map(item => item[key]).filter(Boolean))];
@@ -26,35 +25,11 @@ const getUniqueValues = (key) => {
     });
 };
 
-// 가격을 구간으로 변환하는 함수 (외부에서 사용 가능하도록 export)
-export const convertPriceToRange = (price) => {
-    if (!price) return null;
-
-    // 숫자 추출 (쉼표 제거 후)
-    const numPrice = parseInt(price.replace(/[^0-9]/g, ''));
-
-    if (isNaN(numPrice)) return null;
-
-    if (numPrice < 5000) return "5천원미만";
-    if (numPrice < 10000) return "5천원 이상";
-    if (numPrice < 15000) return "1만원 이상";
-    if (numPrice < 20000) return "1만 5천원 이상";
-    if (numPrice < 25000) return "2만원 이상";
-    if (numPrice < 30000) return "2만 5천원 이상";
-    return "3만원 이상";
-};
-
-// 가격대 구간 정의
-const getPriceRanges = () => {
-    return [
-        "5천원미만",
-        "5천원 이상",
-        "1만원 이상",
-        "1만 5천원 이상",
-        "2만원 이상",
-        "2만 5천원 이상",
-        "3만원 이상"
-    ];
+// 가격 숫자 추출 함수
+const parsePrice = (price) => {
+    if (!price) return 0;
+    const num = parseInt(price.replace(/[^0-9]/g, ''));
+    return isNaN(num) ? 0 : num;
 };
 
 export default function TagSelector({ onFilteredDataChange }) {
@@ -62,13 +37,12 @@ export default function TagSelector({ onFilteredDataChange }) {
         food_type: "",
         tag: "",
         service_type: "",
-        menu_price: ""
+        menu_price_range: [0, 50000]  // 레인지 슬라이더로 변경
     });
 
     const foodTypes = getUniqueValues("food_type");
     const tags = getUniqueValues("tag");
     const serviceTypes = getUniqueValues("service_type");
-    const priceRanges = getPriceRanges();
 
     // 데이터 필터링 함수
     const filterData = (currentFilters) => {
@@ -77,23 +51,18 @@ export default function TagSelector({ onFilteredDataChange }) {
             if (currentFilters.food_type && item.food_type !== currentFilters.food_type) {
                 return false;
             }
-
             // 매장 유형 필터
             if (currentFilters.tag && item.tag !== currentFilters.tag) {
                 return false;
             }
-
             // 서비스 유형 필터
             if (currentFilters.service_type && item.service_type !== currentFilters.service_type) {
                 return false;
             }
-
-            // 가격대 필터
-            if (currentFilters.menu_price) {
-                const itemPriceRange = convertPriceToRange(item.menu_price);
-                if (itemPriceRange !== currentFilters.menu_price) {
-                    return false;
-                }
+            // 가격대 필터 (범위 내 포함 여부 확인)
+            const price = parsePrice(item.menu_price);
+            if (price < currentFilters.menu_price_range[0] || price > currentFilters.menu_price_range[1]) {
+                return false;
             }
 
             return true;
@@ -108,22 +77,25 @@ export default function TagSelector({ onFilteredDataChange }) {
         }
     }, [filters, onFilteredDataChange]);
 
-    // 공통 핸들러
+    // 공통 핸들러 (select 요소용)
     const handleChange = (e) => {
         const { name, value } = e.target;
-        const newFilters = { ...filters, [name]: value };
-        setFilters(newFilters);
+        setFilters(prev => ({ ...prev, [name]: value }));
+    };
+
+    // 슬라이더 값 변경 핸들러
+    const handleSliderChange = (event, newValue) => {
+        setFilters(prev => ({ ...prev, menu_price_range: newValue }));
     };
 
     // 리셋 핸들러
     const handleReset = () => {
-        const resetFilters = {
+        setFilters({
             food_type: "",
             tag: "",
             service_type: "",
-            menu_price: ""
-        };
-        setFilters(resetFilters);
+            menu_price_range: [0, 50000]
+        });
     };
 
     // 현재 선택된 필터들을 배열로 생성
@@ -132,7 +104,7 @@ export default function TagSelector({ onFilteredDataChange }) {
         if (filters.food_type) selected.push(`음식 유형: ${filters.food_type}`);
         if (filters.tag) selected.push(`매장 유형: ${filters.tag}`);
         if (filters.service_type) selected.push(`서비스 유형: ${filters.service_type}`);
-        if (filters.menu_price) selected.push(`가격대: ${filters.menu_price}`);
+        if (filters.menu_price_range) selected.push(`가격대: ${filters.menu_price_range[0]}원 ~ ${filters.menu_price_range[1]}원`);
         return selected;
     };
 
@@ -166,13 +138,20 @@ export default function TagSelector({ onFilteredDataChange }) {
                     ))}
                 </select>
 
-                <label style={{ marginLeft: "1rem" }}>가격대: </label>
-                <select name="menu_price" value={filters.menu_price} onChange={handleChange}>
-                    <option value="">전체</option>
-                    {priceRanges.map((price, i) => (
-                        <option key={i} value={price}>{price}</option>
-                    ))}
-                </select>
+                {/* 가격대 레인지 슬라이더 */}
+                <Box sx={{ width: 250, marginLeft: 3 }}>
+                    <Typography gutterBottom>
+                        가격대: {filters.menu_price_range[0]}원 ~ {filters.menu_price_range[1]}원
+                    </Typography>
+                    <Slider
+                        value={filters.menu_price_range}
+                        onChange={handleSliderChange}
+                        valueLabelDisplay="auto"
+                        min={0}
+                        max={50000}
+                        step={1000}
+                    />
+                </Box>
 
                 <IconButton
                     onClick={handleReset}
