@@ -77,7 +77,7 @@ export default function UpdateCard({ data }) {
         <CardMedia
           component="img"
           height="210"
-          image={data.imag_url}
+          image={data.image_url}
           alt={data.name}
         />
         <CardContent>
