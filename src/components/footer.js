@@ -13,7 +13,7 @@ const Footer = () => {
           spacing={2}
         >
           <Typography variant="body2" color="text.secondary" align="center">
-            © 2020 Mat Jal R. All rights reserved.
+            © 2025 Mat Jal R. All rights reserved.
           </Typography>
 
           <Stack direction="row" spacing={2}>
