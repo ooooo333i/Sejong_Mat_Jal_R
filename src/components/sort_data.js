@@ -1,5 +1,5 @@
 const fs = require('fs');
-const data = JSON.parse(fs.readFileSync('allAboutInfo.json', 'utf8'));
+const data = JSON.parse(fs.readFileSync('sejongMJR_data_final.json', 'utf8'));
 
 const uniqueData = [];
 const seenNames = new Set();
