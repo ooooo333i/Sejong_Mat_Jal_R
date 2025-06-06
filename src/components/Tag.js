@@ -1,6 +1,6 @@
 // components/Tag.js
 import React, { useState, useEffect } from "react";
-import restaurantData from './allAboutInfo.json';
+import restaurantData from './sejongMJR_data_final.json';
 import {
     IconButton, Typography, Box, Slider
 } from "@mui/material";
@@ -43,7 +43,7 @@ export default function TagSelector({ onFilteredDataChange }) {
     const foodTypes = getUniqueValues("food_type");
     const tags = getUniqueValues("tag");
     const serviceTypes = getUniqueValues("service_type");
-
+    
     // 데이터 필터링 함수
     const filterData = (currentFilters) => {
         return restaurantData.filter(item => {
@@ -76,6 +76,9 @@ export default function TagSelector({ onFilteredDataChange }) {
             onFilteredDataChange(filteredData);
         }
     }, [filters, onFilteredDataChange]);
+
+
+
 
     // 공통 핸들러 (select 요소용)
     const handleChange = (e) => {
