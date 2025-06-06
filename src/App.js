@@ -3,6 +3,8 @@ import ScrollView from "./components/scrollview";
 import TagSelector from "./components/Tag";
 import Footer from "./components/footer";
 import { Box } from "@mui/material";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import theme from "./theme";
 
 function App() {
   const [filters, setFilters] = useState({
@@ -19,13 +21,15 @@ function App() {
   };
 
   return (
-    <Box display="flex" flexDirection="column" minHeight="100vh">
-      <TagSelector onFilteredDataChange={handleFilteredDataChange} />
-      <Box component="main" flex={1}>
-        <ScrollView filteredData={filteredData} />
+    <ThemeProvider theme={theme}>
+      <Box display="flex" flexDirection="column" minHeight="100vh">
+        <TagSelector onFilteredDataChange={handleFilteredDataChange} />
+        <Box component="main" flex={1}>
+          <ScrollView filteredData={filteredData} />
+        </Box>
+        <Footer />
       </Box>
-      <Footer />
-    </Box>
+    </ThemeProvider>
   );
 }
 
