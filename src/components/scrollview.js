@@ -1,11 +1,20 @@
-import * as React from 'react';
-import { Box, Fab } from '@mui/material';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Card from './card';
-import ScrollTop from './scrolltop'; // 위에서 만든 컴포넌트 import
+import * as React from "react";
+import { Box, Button, Fab } from "@mui/material";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import Card from "./card";
+import ScrollTop from "./scrolltop";
 
-export default function ScrollView({ filteredData }) {
-  const dataToDisplay = filteredData || [];
+const ITEMS_PER_PAGE = 20;
+
+export default function ScrollView({ filteredData = [] }) {
+  const [page, setPage] = React.useState(1);
+
+  const handleLoadMore = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const visibleData = filteredData.slice(0, page * ITEMS_PER_PAGE);
+  const hasMore = visibleData.length < filteredData.length;
 
   return (
     <>
@@ -19,10 +28,19 @@ export default function ScrollView({ filteredData }) {
           p: 2,
         }}
       >
-        {dataToDisplay.map((item, idx) => (
+        {visibleData.map((item, idx) => (
           <Card key={idx} data={item} />
         ))}
       </Box>
+
+      {hasMore && (
+        <Box display="flex" justifyContent="center" mt={2}>
+          <Button variant="contained" onClick={handleLoadMore}>
+            더보기
+          </Button>
+        </Box>
+      )}
+
       <ScrollTop>
         <Fab size="small" color="primary" aria-label="scroll back to top">
           <KeyboardArrowUpIcon />
