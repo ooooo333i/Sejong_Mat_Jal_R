@@ -26,5 +26,5 @@ const sortedData = uniqueData.sort((a, b) => {
 });
 
 // 정렬된 데이터 저장
-fs.writeFileSync('allAboutInfo.json', JSON.stringify(sortedData, null, 2));
+fs.writeFileSync('sejongMJR_data_final.json', JSON.stringify(sortedData, null, 2));
 console.log(`정렬 및 중복 제거 ${data.length}개 -> ${uniqueData.length}개`);
