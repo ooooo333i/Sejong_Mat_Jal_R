@@ -10,9 +10,12 @@ import {
   Slider,
   IconButton,
   Chip,
-  Button
+  Button,
+  ButtonGroup
 } from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import StarIcon from "@mui/icons-material/Star";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 
 // 가격 숫자 추출 함수
 const parsePrice = (price) => {
@@ -21,13 +24,23 @@ const parsePrice = (price) => {
   return isNaN(num) ? 0 : num;
 };
 
-export default function TagSelector({ onFilteredDataChange }) {
+// 별점 숫자 추출 함수
+const parseRating = (rating) => {
+  if (!rating) return 0;
+  const num = parseFloat(rating);
+  return isNaN(num) ? 0 : num;
+};
+
+export default function TagSelector({ onFilteredDataChange, onFiltersChange }) {
   const [filters, setFilters] = useState({
     food_type: "",
     tag: "",
     service_type: "",
     menu_price_range: [0, 50000]
   });
+
+  const [sortType, setSortType] = useState(""); // "rating" 또는 "price"
+  const [sortOrder, setSortOrder] = useState({}); // {rating: "desc", price: "asc"} 등
 
   const foodTypes = [...new Set(restaurantData.map(item => item.food_type).filter(Boolean))];
 
@@ -48,8 +61,8 @@ export default function TagSelector({ onFilteredDataChange }) {
       .filter(Boolean)
   )];
 
-  useEffect(() => { // 필터 적용
-    const filtered = restaurantData.filter((item) => {
+  useEffect(() => { // 필터 적용 및 정렬
+    let filtered = restaurantData.filter((item) => {
       if (filters.food_type && item.food_type !== filters.food_type) return false;
       if (filters.tag && item.tag !== filters.tag) return false;
       if (filters.service_type && item.service_type !== filters.service_type) return false;
@@ -60,9 +73,28 @@ export default function TagSelector({ onFilteredDataChange }) {
       return true;
     });
 
-    //필터 바꼈을 때 핸들러
+    // 정렬 적용
+    if (sortType === "rating") {
+      const order = sortOrder.rating || "desc";
+      filtered = filtered.sort((a, b) => {
+        return order === "desc"
+          ? parseRating(b.rating) - parseRating(a.rating)
+          : parseRating(a.rating) - parseRating(b.rating);
+      });
+    } else if (sortType === "price") {
+      const order = sortOrder.price || "desc";
+      filtered = filtered.sort((a, b) => {
+        return order === "desc"
+          ? parsePrice(b.menu_price) - parsePrice(a.menu_price)
+          : parsePrice(a.menu_price) - parsePrice(b.menu_price);
+      });
+    }
+
+    //필터 바뀌었을 때 핸들러
     onFilteredDataChange?.(filtered);
-  }, [filters, onFilteredDataChange]);
+    // 필터 상태를 부모 컴포넌트로 전달
+    onFiltersChange?.({ ...filters, sortType, sortOrder });
+  }, [filters, sortType, sortOrder, onFilteredDataChange, onFiltersChange]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -87,6 +119,8 @@ export default function TagSelector({ onFilteredDataChange }) {
       service_type: "",
       menu_price_range: [0, 50000]
     });
+    setSortType("");
+    setSortOrder({});
   };
 
   const handleTagClick = (tag) => {
@@ -97,12 +131,32 @@ export default function TagSelector({ onFilteredDataChange }) {
     }));
   };
 
+  // 정렬 버튼 핸들러
+  const handleSortClick = (type) => {
+    if (sortType === type) {
+      // 같은 버튼을 다시 클릭한 경우 정렬 순서 토글
+      setSortOrder(prev => ({
+        ...prev,
+        [type]: prev[type] === "desc" ? "asc" : "desc"
+      }));
+    } else {
+      // 다른 버튼을 클릭한 경우 새로운 정렬 타입 설정 (기본: 높은순)
+      setSortType(type);
+      setSortOrder(prev => ({
+        ...prev,
+        [type]: prev[type] || "desc"
+      }));
+    }
+  };
+
   // 선택된 필터 보여주기 true/false
   const selectedFilters = [
     filters.food_type && `음식 유형: ${filters.food_type}`,
     filters.tag && `매장 유형: ${filters.tag}`,
     filters.service_type && `서비스 유형: ${filters.service_type}`,
     `가격대: ${filters.menu_price_range[0]}원 ~ ${filters.menu_price_range[1]}원`,
+    sortType === "rating" && `정렬: 별점 ${sortOrder.rating === "asc" ? "낮은순" : "높은순"}`,
+    sortType === "price" && `정렬: 가격 ${sortOrder.price === "asc" ? "낮은순" : "높은순"}`
   ].filter(Boolean);
 
   return (
@@ -157,6 +211,26 @@ export default function TagSelector({ onFilteredDataChange }) {
           />
         </Box>
 
+        {/* 정렬 버튼 */}
+        <ButtonGroup size="small">
+          <Button
+            variant={sortType === "rating" ? "contained" : "outlined"}
+            onClick={() => handleSortClick("rating")}
+            startIcon={<StarIcon />}
+            sx={{ minWidth: 140 }}
+          >
+            별점 {sortType === "rating" ? (sortOrder.rating === "asc" ? "낮은순" : "높은순") : "정렬"}
+          </Button>
+          <Button
+            variant={sortType === "price" ? "contained" : "outlined"}
+            onClick={() => handleSortClick("price")}
+            startIcon={<AttachMoneyIcon />}
+            sx={{ minWidth: 140 }}
+          >
+            가격 {sortType === "price" ? (sortOrder.price === "asc" ? "낮은순" : "높은순") : "정렬"}
+          </Button>
+        </ButtonGroup>
+
         <IconButton onClick={handleReset} color="primary" title="필터 초기화">
           <RefreshIcon />
         </IconButton>
@@ -166,7 +240,7 @@ export default function TagSelector({ onFilteredDataChange }) {
       {filters.food_type && (
         <Box sx={{ mb: 2 }}>
           <Typography variant="subtitle2" fontWeight={600} mb={1}>
-            음식 종류 
+            음식 종류
           </Typography>
           <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1 }}>
             {filteredTags.map((tag, idx) => (

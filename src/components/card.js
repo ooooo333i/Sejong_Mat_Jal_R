@@ -89,23 +89,31 @@ export default function UpdateCard({ data }) {
           {/* 평점 */}
           <Box display="flex" alignItems="center">
             <Typography variant="body2" sx={{ mr: 1 }}>
-              {data.rating}
+              {data.rating ? data.rating : "미제공"}
             </Typography>
-            <Rating
-              name="rating-read"
-              defaultValue={data.rating}
-              size="small"
-              precision={0.1}
-              readOnly
-            />
-            <Typography variant="body2" sx={{ ml: 1, color: 'text.secondary' }}>
-              ({data.review_count})
-            </Typography>
+            {data.rating ? (
+              <>
+                <Rating
+                  name="rating-read"
+                  defaultValue={data.rating}
+                  size="small"
+                  precision={0.1}
+                  readOnly
+                />
+                <Typography variant="body2" sx={{ ml: 1, color: 'text.secondary' }}>
+                  ({data.review_count})
+                </Typography>
+              </>
+            ) : (
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                (평점 정보 없음)
+              </Typography>
+            )}
           </Box>
           {/* 전화번호 */}
           <Typography>
             <img width="15" height="15" src={icons.phone} alt="phone--v1" /> &nbsp;
-            {data.phone}
+            {data.phone || "미제공"}
           </Typography>
         </CardContent>
       </CardActionArea>
