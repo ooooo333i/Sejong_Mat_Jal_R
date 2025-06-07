@@ -6,8 +6,13 @@ import ScrollTop from "./scrolltop";
 
 const ITEMS_PER_PAGE = 20;
 
-export default function ScrollView({ filteredData = [] }) {
+export default function ScrollView({ filteredData = [], filterKey }) {
   const [page, setPage] = React.useState(1);
+
+  // 필터가 변경될 때 페이지를 1로 리셋
+  React.useEffect(() => {
+    setPage(1);
+  }, [filterKey]);
 
   const handleLoadMore = () => {
     setPage((prev) => prev + 1);
@@ -29,7 +34,10 @@ export default function ScrollView({ filteredData = [] }) {
         }}
       >
         {visibleData.map((item, idx) => (
-          <Card key={idx} data={item} />
+          <Card
+            key={`${idx}-${filterKey || 'default'}`}
+            data={item}
+          />
         ))}
       </Box>
 

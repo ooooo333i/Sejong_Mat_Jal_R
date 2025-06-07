@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, IconButton, Container, Stack } from '@mui/material';
-import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
+import { Instagram, SchoolOutlined } from '@mui/icons-material';
 
 const Footer = () => {
   return (
@@ -17,17 +17,11 @@ const Footer = () => {
           </Typography>
 
           <Stack direction="row" spacing={2}>
-            <IconButton color="primary" aria-label="facebook">
-              <Facebook />
-            </IconButton>
-            <IconButton color="primary" aria-label="twitter">
-              <Twitter />
-            </IconButton>
-            <IconButton color="primary" aria-label="instagram">
+            <IconButton color="primary" aria-label="instagram" href="https://www.instagram.com/sejong_univ/?hl=ko">
               <Instagram />
             </IconButton>
-            <IconButton color="primary" aria-label="linkedin">
-              <LinkedIn />
+            <IconButton color="primary" aria-label="school" href="http://www.sejong.ac.kr/">
+              <SchoolOutlined />
             </IconButton>
           </Stack>
         </Stack>

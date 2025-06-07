@@ -20,12 +20,25 @@ function App() {
     setFilteredData(data);
   };
 
+  const handleFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+  };
+
+  // 필터 변경을 감지하기 위한 키 생성
+  const filterKey = `${filters.food_type}-${filters.tag}-${filters.service_type}-${filters.menu_price}`;
+
   return (
     <ThemeProvider theme={theme}>
       <Box display="flex" flexDirection="column" minHeight="100vh">
-        <TagSelector onFilteredDataChange={handleFilteredDataChange} />
+        <TagSelector
+          onFilteredDataChange={handleFilteredDataChange}
+          onFiltersChange={handleFiltersChange}
+        />
         <Box component="main" flex={1}>
-          <ScrollView filteredData={filteredData} />
+          <ScrollView
+            filteredData={filteredData}
+            filterKey={filterKey}
+          />
         </Box>
         <Footer />
       </Box>
