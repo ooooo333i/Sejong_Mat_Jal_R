@@ -49,7 +49,7 @@ export default function UpdateCard({ data }) {
       <CardActionArea component="a" href={data.detail_link} target="_blank" sx={{ height: 400 }}>
         {/* 카드 헤더 */}
         <CardHeader title={data.name} subheader={data.majorTag} sx={{
-          height: 40,
+          height: 90,
           alignItems: 'flex-start',
           '& .MuiCardHeader-content': {
             overflow: 'hidden'
