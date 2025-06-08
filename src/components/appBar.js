@@ -8,9 +8,10 @@ import {
     useScrollTrigger
 } from "@mui/material";
 
+
 function HideOnScroll({ children }) {
     const trigger = useScrollTrigger({
-        threshold: 80,
+        threshold: 100,
         disableHysteresis: true,
     });
 
@@ -21,15 +22,17 @@ function HideOnScroll({ children }) {
     );
 }
 
-function appBar() {
+function CustomAppBar() {
     return (
         <HideOnScroll>
             <AppBar
                 position="fixed"
                 sx={{
                     backgroundColor: '#4FC3F7',
-                    boxShadow: 'none',
-                }}>
+                    backdropFilter: 'blur(10px)',
+                    boxShadow: '0 2px 20px rgba(0,0,0,0.1)'
+                }}
+            >
                 <Toolbar>
                     <Avatar
                         sx={{
@@ -37,8 +40,13 @@ function appBar() {
                             height: 40,
                             backgroundColor: '#81D4FA',
                             mr: 2
-                        }}>
-                        <img src={process.env.PUBLIC_URL + '/favicon.png'} alt="Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                        }}
+                    >
+                        <img
+                            src={process.env.PUBLIC_URL + '/favicon.png'}
+                            alt="Logo"
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
                     </Avatar>
                     <Typography
                         variant="h6"
@@ -47,7 +55,8 @@ function appBar() {
                             flexGrow: 1,
                             fontWeight: 'bold',
                             color: 'white'
-                        }}>
+                        }}
+                    >
                         세종대 맛잘알
                     </Typography>
                 </Toolbar>
@@ -56,4 +65,4 @@ function appBar() {
     );
 }
 
-export default appBar;
+export default CustomAppBar;

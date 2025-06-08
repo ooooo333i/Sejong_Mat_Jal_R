@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ScrollView from "./components/scrollview";
 import TagSelector from "./components/Tag";
 import Footer from "./components/footer";
-import appBar from "./components/appBar";
+import CustomAppBar from "./components/appBar";
 import { Box, Toolbar } from "@mui/material";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "./theme";
@@ -32,8 +32,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Box display="flex" flexDirection="column" minHeight="100vh">
-        <appBar />
+        {/* 반응형 AppBar */}
+        <CustomAppBar />
+
+        {/* AppBar 높이만큼 상단 여백 추가 */}
         <Toolbar />
+
         <TagSelector
           onFilteredDataChange={handleFilteredDataChange}
           onFiltersChange={handleFiltersChange}
