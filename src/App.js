@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import ScrollView from "./components/scrollview";
 import TagSelector from "./components/Tag";
 import Footer from "./components/footer";
-import { Box } from "@mui/material";
+import appBar from "./components/appBar";
+import { Box, Toolbar } from "@mui/material";
 import { ThemeProvider, CssBaseline } from "@mui/material";
 import theme from "./theme";
 
@@ -29,7 +30,10 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Box display="flex" flexDirection="column" minHeight="100vh">
+        <appBar />
+        <Toolbar />
         <TagSelector
           onFilteredDataChange={handleFilteredDataChange}
           onFiltersChange={handleFiltersChange}
