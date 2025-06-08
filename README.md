@@ -36,11 +36,10 @@
 
 ```bash
 # 1. 프로젝트 클론
-git clone https://github.com/ooooo333i/Sejong-Mat-Jal-R.git
+git clone https://github.com/ooooo333i/Sejong-Mat-Jal_R.git
 cd sejong-mat-jal-r
 # 2. 패키지 설치
 npm install
-
 # 3. 개발 서버 실행
 npm start
 ```
