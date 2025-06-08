@@ -17,10 +17,10 @@ const Footer = () => {
           </Typography>
 
           <Stack direction="row" spacing={2}>
-            <IconButton color="primary" aria-label="instagram" href="https://www.instagram.com/sejong_univ/?hl=ko">
+            <IconButton color="primary" aria-label="instagram" target="_blank" href="https://www.instagram.com/sejong_univ/?hl=ko">
               <Instagram />
             </IconButton>
-            <IconButton color="primary" aria-label="school" href="http://www.sejong.ac.kr/">
+            <IconButton color="primary" aria-label="school" target="_blank" href="http://www.sejong.ac.kr/">
               <SchoolOutlined />
             </IconButton>
           </Stack>
