@@ -1,4 +1,5 @@
-![favicon](https://github.com/user-attachments/assets/c110953a-59ad-42de-a38c-a1d7037756d4)# Sejong Mat-Jal-R (세종대 맛잘알)
+
+<img src="https://github.com/user-attachments/assets/c110953a-59ad-42de-a38c-a1d7037756d4" width="300" height="300">
 
 ---
 
